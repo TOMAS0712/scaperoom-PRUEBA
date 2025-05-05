@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prueba Scaperoom GOLF</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    .frase {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    input {
+      width: 150px;
+      padding: 5px;
+      font-size: 1rem;
+      margin: 0 5px;
+      text-align: center;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -20%);
+      background: white;
+      padding: 2rem;
+      border: 2px solid black;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    .popup h2 {
+      margin: 0 0 1rem 0;
+    }
+    .popup.success h2 {
+      color: green;
+    }
+    .popup.error h2 {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>GOLF</h1>
+
+  <div class="frase">
+    Un escape room es un juego de aventura físico o virtual en el que un grupo de personas queda "encerrado" en una habitación temática y debe resolver una serie de 
+    <input id="input1" type="text" placeholder="..." /> , rompecabezas y desafíos para poder 
+    <input id="input2" type="text" placeholder="..." /> antes de que se agote un 
+    <input id="input3" type="text" placeholder="..." /> límite.
+  </div>
+
+  <button onclick="verificar()">Verificar</button>
+
+  <div id="popupSuccess" class="popup success">
+    <h2>¡Enhorabuena!</h2>
+    <p>Pasas a la siguiente prueba.</p>
+    <button onclick="window.location.href='prueba2.html'">Siguiente prueba</button>
+  </div>
+
+  <div id="popupError" class="popup error">
+    <h2>¡Vuelve a intentarlo!</h2>
+    <p>Debes acertar todas para pasar a la siguiente prueba.</p>
+    <button onclick="cerrarError()">Cerrar</button>
+  </div>
+
+  <script>
+    const respuestas = ["problemas", "escapar", "tiempo"];
+
+    function verificar() {
+      const inputs = [
+        document.getElementById("input1"),
+        document.getElementById("input2"),
+        document.getElementById("input3")
+      ];
+
+      let aciertos = 0;
+
+      for (let i = 0; i < inputs.length; i++) {
+        const valor = inputs[i].value.trim().toLowerCase();
+        if (valor === respuestas[i]) {
+          inputs[i].disabled = true;
+          aciertos++;
+        } else {
+          inputs[i].value = "";
+        }
+      }
+
+      if (aciertos === respuestas.length) {
+        document.getElementById("popupSuccess").style.display = "block";
+      } else {
+        document.getElementById("popupError").style.display = "block";
+      }
+    }
+
+    function cerrarError() {
+      document.getElementById("popupError").style.display = "none";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prueba 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    .pregunta {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+    }
+    select, button {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 1rem;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -20%);
+      background: white;
+      padding: 2rem;
+      border: 2px solid black;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    .popup h2 {
+      margin: 0 0 1rem 0;
+    }
+    .popup.success h2 {
+      color: green;
+    }
+    .popup.error h2 {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Prueba 2</h1>
+
+  <div class="pregunta">
+    ¿Puedo combinar una Gymkana y un Escape room?<br>
+    <select id="respuesta">
+      <option value="">Selecciona una opción</option>
+      <option value="Sí">Sí</option>
+      <option value="No">No</option>
+      <option value="Depende">Depende</option>
+    </select>
+    <br>
+    <button onclick="verificar()">Verificar</button>
+  </div>
+
+  <div id="popupSuccess" class="popup success">
+    <h2>¡Enhorabuena!</h2>
+    <p>Has logrado superar la actividad.</p>
+  </div>
+
+  <div id="popupError" class="popup error">
+    <h2>¡Vuelve a intentarlo!</h2>
+    <button onclick="cerrarError()">Cerrar</button>
+  </div>
+
+  <script>
+    function verificar() {
+      const respuesta = document.getElementById("respuesta").value;
+      if (respuesta === "Sí") {
+        document.getElementById("popupSuccess").style.display = "block";
+      } else {
+        document.getElementById("popupError").style.display = "block";
+      }
+    }
+
+    function cerrarError() {
+      document.getElementById("popupError").style.display = "none";
+    }
+  </script>
+</body>
+</html>
